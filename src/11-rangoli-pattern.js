@@ -37,4 +37,28 @@
  */
 export function rangoli(n) {
   // Your code here
+  if( typeof n =="number"){
+    if( n>0 && Number.isInteger(n)){
+      let diamond=[]
+      for (let index = 0; index < n; index++) {
+        let row=" ".repeat(n-1-index)
+        for(let i = 0; i<=index ;i++ ){
+    
+          row=row.concat("*")
+          if( i!=index){
+            row=row.concat(" ")
+          }
+        }
+        diamond.push(row)
+        
+      }
+      for (let index = diamond.length-2; index >=0 ; index--) {
+        const element = diamond[index];
+        diamond.push(element)
+      }
+      return diamond
+    }
+  }
+  return []
 }
+console.log(rangoli(3))

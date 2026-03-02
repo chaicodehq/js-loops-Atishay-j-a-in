@@ -28,4 +28,11 @@
  */
 export function chaiTapriRevenue(customers) {
   // Your code here
+  if( typeof customers == "number"){
+    if( customers>0 && Number.isInteger(customers)){
+      let everyThirdCust= Math.floor(customers/3)
+      return { totalChai: customers , totalRevenue: (everyThirdCust * 15) + ((customers-everyThirdCust)*10) }
+    }
+  }
+  return {totalChai:0, totalRevenue:0}
 }

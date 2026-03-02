@@ -33,4 +33,34 @@
  */
 export function calculateAutoFare(distance, waitingMinutes = 0) {
   // Your code here
+  if( typeof distance == "number"){
+    if( distance>0 ){
+      distance= Math.ceil(distance)
+      let wFare= 0
+      if( waitingMinutes ){
+        if( waitingMinutes>0){
+
+          wFare= Math.ceil(waitingMinutes/2)*5
+        }
+        else{
+          return -1
+        }
+      }
+    
+      distance--
+      wFare+=30
+      if( distance >4){
+        wFare+=60
+      }
+      else{
+        wFare+=distance*15
+      }
+      distance-=4
+      if( distance>0){
+        wFare+= distance*10
+      }
+      return wFare
+    }
+  }
+  return -1
 }

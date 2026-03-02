@@ -38,4 +38,63 @@
  */
 export function iplPointsTable(matches) {
   // Your code here
+  if(Array.isArray(matches)){
+    if(matches.length>0){
+      let result = {}
+      let ans=[]
+      for (const element of matches) {
+        if(!result[element.team1]){
+          result[element.team1]={played: 1, won: 0, lost: 0, tied: 0, noResult: 0, points: 0}
+        }
+        else{
+           result[element.team1].played+=1
+        }
+        if(!result[element.team2]){
+          result[element.team2]={played: 1, won: 0, lost: 0, tied: 0, noResult: 0, points: 0}
+        }
+        else{
+          result[element.team2].played+=1
+        }
+        
+        if( element.result=="win"){
+          result[element.winner].won+=1
+          result[element.winner].points+=2
+          if(element.winner === element.team1){
+            result[element.team2].lost+=1
+          }
+          else{
+            result[element.team1].lost+=1
+          }
+        }
+        else{
+          result[element.team1].points+=1
+          result[element.team2].points+=1
+          if(element.result=="tie"){
+            result[element.team1].tied+=1
+            result[element.team2].tied+=1
+          }
+          else{
+             result[element.team1].noResult+=1
+             result[element.team2].noResult+=1
+          }
+
+        }
+      }
+      for (const key in result) {
+        ans.push({...result[key] , team:key})
+        
+      }
+      ans.sort((a,b)=>{
+        if(a.points-b.points == 0){
+          return a.team.localeCompare(b.team)
+        }
+        else{
+         return b.points-a.points
+        }
+      })
+
+      return ans
+    }
+  }
+   return []
 }

@@ -39,4 +39,26 @@
  */
 export function diwaliLightsPlan(lightStrings, budget) {
   // Your code here
+  if (Array.isArray(lightStrings) && typeof budget == "number") {
+    if (budget > 0) {
+      let bill = { golden: 50, multicolor: 40, white: 30 }
+      let select = { selected: [], totalLength: 0, totalCost: 0 }
+      for (const element of lightStrings) {
+        let cost = 35
+        if (bill[element.color]) {
+          cost = bill[element.color]
+        }
+        if (select.totalCost + element.length * cost < budget) {
+          select.selected.push({...element,cost:element.length *cost})
+          select.totalCost=select.totalCost + (element.length *cost)
+          select.totalLength += element.length
+        }
+        else{
+          break
+        }
+      }
+      return select
+    }
+  }
+  return { selected: [], totalLength: 0, totalCost: 0 }
 }
